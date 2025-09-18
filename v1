@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Changer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      transition: background-color 0.5s ease;
+      -webkit-transition: background-color 0.5s ease;
+      -moz-transition: background-color 0.5s ease;
+      -ms-transition: background-color 0.5s ease;
+      -o-transition: background-color 0.5s ease;
+    }
+  </style>
+</head>
+<!-- The body uses flexbox to center its content both horizontally and vertically -->
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen relative text-gray-800">
+
+  <div class="absolute top-4 right-4 flex space-x-2">
+    <!-- Black Button -->
+    <button id="blackButton" class="bg-white hover:bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-full shadow-lg transition-colors">
+      Black
+    </button>
+    <!-- White Button -->
+    <button id="whiteButton" class="bg-white hover:bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-full shadow-lg transition-colors">
+      White
+    </button>
+        <!-- Custom Color Picker -->
+        <span class="bg-white hover:bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-full shadow-lg transition-colors flex items-center">
+                <input id="colorPicker" type="color">
+                <label for="colorPicker">Custom</label>
+        </span>
+  </div>
+
+  <!-- Clock -->
+  <div id="clock" class="absolute bottom-4 left-4 bg-white hover:bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-full shadow-lg transition-colors"></div>
+
+  <script>
+        document.querySelector("#blackButton").addEventListener("click", () => {
+                document.body.style.background = 'black';
+                document.body.style.color = 'white';
+        });
+
+        document.querySelector("#whiteButton").addEventListener("click", () => {
+                document.body.style.background = 'white';
+                document.body.style.color = 'black';
+        });
+
+        document.querySelector("#colorPicker").addEventListener("change", (event) => {
+                document.body.style.background = event.target.value;
+        });
+
+    // Clock
+    function updateClock() {
+      const clockElement = document.getElementById('clock');
+      const now = new Date();
+      const time = now.toLocaleTimeString();
+      clockElement.textContent = time;
+    }
+
+    // Update the clock every second
+    setInterval(updateClock, 1000);
+    // Call it immediately to avoid a 1-second delay
+    updateClock();
+  </script>
+
+</body>
+</html>
